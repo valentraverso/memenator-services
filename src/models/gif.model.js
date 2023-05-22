@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { mongoose, model } = require("mongoose");
 
 const gifSchema = mongoose.Schema(
     {
@@ -15,14 +15,15 @@ const gifSchema = mongoose.Schema(
         description: {
             type: String,
             maxlength: 30,
-            required: [ture, "You need to add a description."]
+            required: [true, "You need to add a description."]
         },
         tags: {
             type: Array
         },
         views: {
             type: Number,
-            required: false
+            required: false,
+            default: 0
         }
     },
     {

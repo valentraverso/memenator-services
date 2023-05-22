@@ -5,10 +5,12 @@ const {
     DB,
     PORT
 } = require("./utils/config");
-const { gifRoute } = require("./routes")
+const jwtCheck = require("./utils/authz");
+const { gifRoute } = require("./routes");
 
 const app = express();
 
+app.use(jwtCheck);
 app.use(express.json());
 app.use(cors());
 
