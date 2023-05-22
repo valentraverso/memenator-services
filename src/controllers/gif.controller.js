@@ -3,7 +3,7 @@ const albumModel = require("../models");
 const gifController = {
     getAll: async (req, res) => {
         try {
-            
+
         } catch (err) {
             return res.status(500).send({
                 status: false,
@@ -22,7 +22,10 @@ const gifController = {
                     tags
                 })
         } catch (err) {
-
+            return res.status(500).send({
+                status: false,
+                msg: "We have trouble in the server."
+            })
         }
     }
 }
