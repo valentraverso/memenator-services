@@ -34,6 +34,7 @@ const gifController = {
         const { gifs } = req.files;
 
         if (gifs.mimetype !== 'image/gif') {
+            await fs.unlink(gifs.tempFilePath);
             return res.status(415).send({
                 status: false,
                 msg: "We only allow gifs."
@@ -70,9 +71,9 @@ const gifController = {
     postGifUrl: async (req, res) => {
         const { description, tags, url } = req.body;
 
-        try{
+        try {
 
-        }catch(err){
+        } catch (err) {
             return res.status(500).send({
                 status: false,
                 msg: "There was an error",
