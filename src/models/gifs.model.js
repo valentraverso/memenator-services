@@ -16,6 +16,13 @@ const gifSchema = mongoose.Schema(
             type: String,
             maxlength: 30,
             required: [ture, "You need to add a description."]
+        },
+        tags: {
+            type: Array
+        },
+        views: {
+            type: Number,
+            required: false
         }
     },
     {
