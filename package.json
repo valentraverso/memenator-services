@@ -1,0 +1,32 @@
+{
+  "name": "memenator",
+  "version": "1.0.0",
+  "description": "Backend of memenator app",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valentraverso/memenator-services.git"
+  },
+  "author": "Valentino Traverso",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valentraverso/memenator-services/issues"
+  },
+  "homepage": "https://github.com/valentraverso/memenator-services#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "mongoose": "^7.2.0",
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.22"
+  }
+}
