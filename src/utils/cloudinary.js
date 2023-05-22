@@ -1,11 +1,19 @@
 const cloudinary = require('cloudinary').v2;
-const { CLOUD_NAME, CLOUD_API_KEY, CLOUD_API_SECRET } = require("../config/config");
+cloudinary.config();
 
 const uploadGif = async (filePath) => {
-    return await cloudinary.uploader.upload(filePath, {
-        resource_type: 'image',
-        folder: 'Memenator/gifs'
-    });
+    try {
+        return await cloudinary.uploader.upload(filePath, {
+            resource_type: 'image',
+            folder: 'Memenator/gifs'
+        });
+    } catch (err) {
+        console.log(err)
+        return {
+            status: false,
+            msg: err.message
+        }
+    }
 }
 
 module.exports = {

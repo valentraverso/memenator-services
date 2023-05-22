@@ -6,6 +6,7 @@ const {
     PORT
 } = require("./utils/config");
 const jwtCheck = require("./utils/authz");
+const fileUpload = require("express-fileupload")
 const { gifRoute } = require("./routes");
 
 const app = express();
