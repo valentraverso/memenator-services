@@ -1,4 +1,5 @@
 const albumModel = require("../models");
+const { uploadGif } = require("../utils/cloudinary");
 
 const gifController = {
     getAll: async (req, res) => {
@@ -16,6 +17,8 @@ const gifController = {
         const { gif } = req.files;
 
         try {
+            const { public_id, secure_url } = await uploadGif();
+
             const gif = await albumModel
                 .create({
                     description,

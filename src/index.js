@@ -13,6 +13,10 @@ const app = express();
 app.use(jwtCheck);
 app.use(express.json());
 app.use(cors());
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: './src/assets/tmp/'
+}));
 
 connectDB(app, PORT, DB);
 
