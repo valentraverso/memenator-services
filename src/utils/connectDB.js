@@ -9,11 +9,11 @@ function connectDB(app, PORT, DB) {
             (\____/)
              (_oo_)
                (O)
-             __||__    \)  | MEMENATOR SERVER |
-          []/______\[] /     PORT: ${PORT}
-          / \______/ \/
-         /    /__\
-        (\   /____\
+             __||__    \\)  | MEMENATOR SERVER |
+          []/______\\[] /     PORT: ${PORT}
+          / \\______/ \\/
+         /    /__\\
+        (\\   /____\\
             `)
             })
         })
