@@ -1,5 +1,5 @@
-const gifs = require("./gifs.model")
+const gifModel = require("./gif.model")
 
 module.exports = {
-    gifs
+    gifModel
 }

@@ -5,6 +5,7 @@ const {
     DB,
     PORT
 } = require("./utils/config");
+const { gifRoute } = require("./routes")
 
 const app = express();
 
@@ -13,3 +14,4 @@ app.use(cors());
 
 connectDB(app, PORT, DB);
 
+app.use("/gifs", gifRoute);
