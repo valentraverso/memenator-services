@@ -29,6 +29,111 @@ const gifController = {
             })
         }
     },
+    getByDescription: async (req, res) => {
+        const { description } = req.params;
+
+        try {
+            const gif = await gifModel
+                .aggregate([
+                    {
+                        $match: {
+                            description: {
+                                $regex: description,
+                                $options: "i"
+                            }
+                        }
+                    }
+                ])
+
+            return res.status(200).send({
+                status: true,
+                msg: "We find registers.",
+                data: gif
+            })
+        } catch (err) {
+            return res.status(500).send({
+                status: false,
+                msg: "There was an error",
+                data: err.message
+            })
+        }
+    },
+    getMostUploadTags: async (req, res) => {
+        try {
+            const gif = await gifModel
+                .aggregate([
+                    {
+                        $unwind: "$tags"
+                    },
+                    {
+                        $limit: 5
+                    }
+                ])
+                .exec();
+
+            if (gif.length < 1) {
+                return res.status(400).send({
+                    status: false,
+                    msg: "We couldn't find tags."
+                })
+            }
+
+            return res.status(200).send({
+                status: true,
+                msg: "We could find registers.",
+                data: gif
+            })
+        } catch (err) {
+            return res.status(500).send({
+                status: false,
+                msg: "There was an error",
+                data: err.message
+            })
+        }
+    },
+    getByTagName: async (req, res) => {
+        const { tag } = req.params;
+
+        if (tag.length > 20) {
+            return res.status(409).send({
+                status: false,
+                msg: "The name of the tag need to be less than 20 characters."
+            })
+        }
+
+        try {
+            const gif = await gifModel
+                .aggregate([
+                    {
+                        $match: {
+                            tags: {
+                                $in: [tag]
+                            }
+                        }
+                    }
+                ])
+                .exec();
+
+            if (gif.length < 1) {
+                return res.status(404).send({
+                    status: false,
+                    msg: "We couldn't find this tag."
+                })
+            }
+
+            return res.status(200).send({
+                status: true,
+                msg: "We could find registers.",
+                data: gif
+            })
+        } catch (err) {
+            return res.status(500).send({
+                status: false,
+                msg: "There was an error",
+                data: err.message
+            })
+        }
+    },
     postGif: async (req, res) => {
         const { description, tags } = req.body;
         const { gifs } = req.files;
@@ -72,6 +177,20 @@ const gifController = {
         const { description, tags, url } = req.body;
 
         try {
+            const gif = await gifModel
+                .create({
+                    file: {
+                        secure_url: url
+                    },
+                    description,
+                    tags
+                });
+
+            res.status(200).send({
+                status: true,
+                msg: "We upload your gif.",
+                data: gif
+            })
 
         } catch (err) {
             return res.status(500).send({
