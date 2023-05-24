@@ -1,4 +1,4 @@
-const { mongoose, model } = require("mongoose");
+const { mongoose, model, Types } = require("mongoose");
 
 const gifSchema = mongoose.Schema(
     {
@@ -24,6 +24,10 @@ const gifSchema = mongoose.Schema(
             type: Number,
             required: false,
             default: 0
+        },
+        owner:{
+            type: String,
+            required: true
         }
     },
     {

@@ -184,6 +184,7 @@ const gifController = {
     postGif: async (req, res) => {
         const { description, tags } = req.body;
         const { gifs } = req.files;
+        const { auth: { payload: { sub } } } = req;
 
         if (gifs.mimetype !== 'image/gif') {
             await fs.unlink(gifs.tempFilePath);
@@ -204,7 +205,8 @@ const gifController = {
                         secure_url
                     },
                     description,
-                    tags: tags.split(",")
+                    tags: tags.split(","),
+                    owner: sub
                 });
 
             res.status(200).send({
@@ -222,6 +224,7 @@ const gifController = {
     },
     postGifUrl: async (req, res) => {
         const { description, tags, url } = req.body;
+        const { auth: { payload: { sub } } } = req;
 
         try {
             const gif = await gifModel
@@ -230,7 +233,8 @@ const gifController = {
                         secure_url: url
                     },
                     description,
-                    tags: tags.split(",")
+                    tags: tags.split(","),
+                    owner: sub
                 });
 
             res.status(200).send({
