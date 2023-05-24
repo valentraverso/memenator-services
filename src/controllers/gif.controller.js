@@ -46,6 +46,13 @@ const gifController = {
                     }
                 ])
 
+            if (gif < 1) {
+                return res.status(404).send({
+                    status: false,
+                    msg: "We couldn't find results."
+                })
+            }
+
             return res.status(200).send({
                 status: true,
                 msg: "We find registers.",
@@ -62,7 +69,7 @@ const gifController = {
     getById: async (req, res) => {
         const { idGif } = req.params;
 
-        if(!mongoose.Types.ObjectId.isValid(idGif)){
+        if (!mongoose.Types.ObjectId.isValid(idGif)) {
             return res.status(400).send({
                 status: false,
                 msg: "Please you need to send a valid object ID."
@@ -197,7 +204,7 @@ const gifController = {
                         secure_url
                     },
                     description,
-                    tags
+                    tags: tags.split(",")
                 });
 
             res.status(200).send({
@@ -223,7 +230,7 @@ const gifController = {
                         secure_url: url
                     },
                     description,
-                    tags
+                    tags: tags.split(",")
                 });
 
             res.status(200).send({
